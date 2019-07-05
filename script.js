@@ -1,3 +1,15 @@
+/**
+    *class @GameMachine {number} bank - the initial amount of money that is entered into the automatic machine;
+    
+    *@get money() - getter, to get the total amount of money in GameMachine;
+    *@takeMoney (number) money - method to take away from GameMachine money;
+    *@addMoney (number) money - method to put money into GameMachine;
+    *@play (money) bet - a function that simulates a game where a player puts a sum in an automaton that is
+    *credited to the amount of the machine. The method generates a random 3-digit number, if the number of 2 
+    *digits is the same, the return sum is 2 times greater than that found in the argument (and subtracted from 
+    *the amount of money in the machine). If 3 digits are the same - a 3-fold sum is returned. 
+**/
+
 class GameMachine {
   constructor(bank) {
     this.bank = bank;
@@ -15,24 +27,6 @@ class GameMachine {
 
   addMoney(money) {
     this.bank += money;
-  }
-
-  _randomNumber() {
-    const randNumber = [null, null, null];
-
-    return randNumber.map(() => {
-      return console.log(Math.floor(Math.random() * 10));
-    });
-  }
-
-  _getRepeatCount(number) {
-    return [...number.toString()].reduce((count, current, _, arr) => {
-      let repeating = current === arr[0] ? 1 : 0;
-      repeating += current === arr[1] ? 1 : 0;
-      repeating += current === arr[2] ? 1 : 0;
-
-      return repeating > count ? repeating : count;
-    }, 0);
   }
 
   play(bet) {
@@ -65,6 +59,13 @@ class GameMachine {
   }
 }
 
+/**
+ *class @Casino {string} name - The class designer takes one parameter - the name of the casino;
+ *@get getMachineCount() - getter, which allows you to receive a number of machines in Casino;
+ *@set getMoney() - getter, which allows you to get the total amount of money at Casino;
+ *@play (money) bet - a function that simulates a game
+ **/
+
 class Casino {
   constructor(name) {
     this.name = name;
@@ -81,6 +82,12 @@ class Casino {
     }, 0);
   }
 }
+
+/**
+ *class @User {string, number} name, money - the constructor accepts 2 input parameters: username and initial amount of user money;
+ *@get selectMachine() - getter, which allows you to choose a GameMachine;
+ *@set selectMachine() - setter, which allows you to set the number of a GameMachine;
+ **/
 
 class User {
   constructor(name, money) {
@@ -113,6 +120,17 @@ class User {
     this.money += this._selectMachine.play(bet);
   }
 }
+
+/**
+ *class @SuperAdmin {string, number} name, money - the constructor accepts 2 input parameters: username and initial amount of user money;
+ *@createCasino(string) casinoName - the method creates a new casino;
+ *@createGameMachine(number) bank- setter, which allows you to set the number of a GameMachine;
+ *@removeGameMachine(number) id - a method that remove the slot machine by the number (the money from the remote machine is distributed
+ *equally between the rest automats in this casino);
+ *@takeMoneyFromCasino(number) sum - a method that takes money from Casino;
+ *@addMoneyToCasino(number) money - a method that adds Casino money;
+ *@addMoneyToGameMachine(number, number) id, money - a method that adds Casino money;
+ **/
 
 class SuperAdmin extends User {
   constructor(name, money) {
